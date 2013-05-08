@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Kinect;
+using System.Threading;
 
 namespace kinectsample_tiltcontrol
 {
@@ -43,6 +44,8 @@ namespace kinectsample_tiltcontrol
                         sensor.ElevationAngle = sensor.ElevationAngle + 5;
                 }
                 Console.WriteLine("現在角度 : " + sensor.ElevationAngle);
+                Thread.Sleep(1000);
+
             }
 
 
