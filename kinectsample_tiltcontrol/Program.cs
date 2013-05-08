@@ -11,7 +11,16 @@ namespace kinectsample_tiltcontrol
     {
         static void Main(string[] args)
         {
-            KinectSensor sensor = KinectSensor.KinectSensors[0];
+            KinectSensor sensor = (from sensorToCheck in KinectSensor.KinectSensors
+                                   where sensorToCheck.Status == KinectStatus.Connected
+                                   select sensorToCheck).FirstOrDefault();
+
+            if (sensor == null)
+            {
+                Console.WriteLine("找不到任何可用的Kinect裝置，結束執行");
+                return;
+            }
+
             sensor.Start();
 
             sensor.ElevationAngle = 0;  // 一開始先設定成水平0度
@@ -29,7 +38,6 @@ namespace kinectsample_tiltcontrol
                 }
                 Console.WriteLine("現在角度 : " + sensor.ElevationAngle);
             }
-
 
             sensor.Stop();
 
