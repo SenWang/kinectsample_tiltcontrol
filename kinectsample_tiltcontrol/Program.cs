@@ -30,14 +30,21 @@ namespace kinectsample_tiltcontrol
             {
                 if (presskey == ConsoleKey.DownArrow)
                 {
-                    sensor.ElevationAngle = sensor.ElevationAngle - 5;
+                    if (sensor.ElevationAngle - 5 < sensor.MinElevationAngle)
+                        sensor.ElevationAngle = sensor.MinElevationAngle;
+                    else
+                        sensor.ElevationAngle = sensor.ElevationAngle - 5;
                 }
                 else if (presskey == ConsoleKey.UpArrow)
                 {
-                    sensor.ElevationAngle = sensor.ElevationAngle + 5;
+                    if (sensor.ElevationAngle + 5 > sensor.MaxElevationAngle)
+                        sensor.ElevationAngle = sensor.MaxElevationAngle;
+                    else
+                        sensor.ElevationAngle = sensor.ElevationAngle + 5;
                 }
                 Console.WriteLine("現在角度 : " + sensor.ElevationAngle);
             }
+
 
             sensor.Stop();
 
